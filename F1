@@ -1,0 +1,9 @@
+FROM registry.lab.example.com/ubi9-beta/ubi:latest
+RUN echo -e '[rhel-9.0-for-x86_64-baseos-rpms]\nbaseurl = http://
+content.example.com/rhel9.0/x86_64/dvd/BaseOS\nenabled = true\ngpgcheck =
+ false\nname = Red Hat Enterprise Linux 9.0 BaseOS (dvd)\n[rhel-9.0-for-x86_64-
+appstream-rpms]\nbaseurl = http://content.example.com/rhel9.0/x86_64/dvd/AppStream
+\nenabled = true\ngpgcheck = false\nname = Red Hat Enterprise Linux 9.0 Appstream
+ (dvd)'>/etc/yum.repos.d/rhel_dvd.repo
+RUN yum install --disablerepo=* --enablerepo=rhel-9.0-for-x86_64-baseos-rpms --
+enablerepo=rhel-9.0-for-x86_64-appstream-rpms -y python3
